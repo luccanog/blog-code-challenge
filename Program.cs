@@ -1,4 +1,7 @@
 
+using BlogWebApi.Storage;
+using Microsoft.EntityFrameworkCore;
+
 namespace BlogWebApi
 {
     public class Program
@@ -8,6 +11,8 @@ namespace BlogWebApi
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -77,11 +77,6 @@ namespace BlogWebApi.Controllers
             [FromBody] CreatePostDto createPostDto,
             CancellationToken cancellationToken)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var post = await _postService.CreatePostAsync(createPostDto, cancellationToken);
 
             return CreatedAtAction(
@@ -110,11 +105,6 @@ namespace BlogWebApi.Controllers
             [FromBody] CreateCommentDto createCommentDto,
             CancellationToken cancellationToken)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var comment = await _postService.AddCommentToPostAsync(id, createCommentDto, cancellationToken);
 
             if (comment == null)

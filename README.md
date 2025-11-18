@@ -5,26 +5,19 @@ A RESTful API built with ASP.NET Core 8.0 for managing blog posts and comments.
 
 ## Getting Started
 
-### 1. Clone the Repository
-
-```bash
-git clone <repository-url>
-cd blog-code-challenge
-```
-
-### 2. Restore Dependencies
+### 1. Restore Dependencies
 
 ```bash
 dotnet restore
 ```
 
-### 3. Run the Application
+### 2. Run the Application
 
 ```bash
 dotnet run --launch-profile https
 ```
 
-### 4. Access Swagger UI
+### 3. Access Swagger UI
 
 You can open Swagger UI and send HTTP requests
 
@@ -67,6 +60,7 @@ blog-code-challenge/
 - **Services**: Contain all business logic and data access
 - **DTOs**: Controllers never expose entity models directly
 - **Entities**: Domain models with encapsulated business rules
+- **Pagination**: Added skip and take arguments in order to paginate Posts results
 
 - Entities use constructors to enforce invariants
 - GUID generation is encapsulated within entities

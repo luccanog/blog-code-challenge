@@ -18,6 +18,9 @@ namespace BlogWebApi
             // Register application services
             builder.Services.AddScoped<IPostService, PostService>();
 
+            // Configure routing to use lowercase URLs
+            builder.Services.AddRouting(options => options.LowercaseUrls = true);
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

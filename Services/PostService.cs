@@ -3,7 +3,6 @@ using BlogWebApi.DTOs.Post;
 using BlogWebApi.Models;
 using BlogWebApi.Storage;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
 
 namespace BlogWebApi.Services
 {
@@ -19,7 +18,7 @@ namespace BlogWebApi.Services
             _context = context;
         }
 
-        public async Task<List<PostSummaryDto>> GetAllPostsAsync()
+        public async Task<List<PostSummaryDto>> GetAllPostsAsync(int skip, int take, CancellationToken cancellationToken = default)
         {
             return await _context.Posts
                 .Include(p => p.Comments)
@@ -31,36 +30,38 @@ namespace BlogWebApi.Services
                     CreatedAt = p.CreatedAt
                 })
                 .OrderByDescending(p => p.CreatedAt)
-                .ToListAsync();
+                .Skip(skip)
+                .Take(take)
+                .ToListAsync(cancellationToken);
         }
 
-        public async Task<PostDto?> GetPostByIdAsync(Guid id)
+        public async Task<PostDto?> GetPostByIdAsync(Guid id, CancellationToken cancellationToken = default)
         {
-           return await _context.Posts
-                .Include(p => p.Comments)
-                .Select(p => new PostDto
-                {
-                    Id = p.Id,
-                    Title = p.Title,
-                    Content = p.Content,
-                    CreatedAt = p.CreatedAt,
-                    Comments = p.Comments.Select(c => new CommentDto
-                    {
-                        Id = c.Id,
-                        Content = c.Content,
-                        Author = c.Author,
-                        CreatedAt = c.CreatedAt,
-                    })
-                })
-                .FirstOrDefaultAsync(p => p.Id == id);
+            return await _context.Posts
+                 .Include(p => p.Comments)
+                 .Select(p => new PostDto
+                 {
+                     Id = p.Id,
+                     Title = p.Title,
+                     Content = p.Content,
+                     CreatedAt = p.CreatedAt,
+                     Comments = p.Comments.Select(c => new CommentDto
+                     {
+                         Id = c.Id,
+                         Content = c.Content,
+                         Author = c.Author,
+                         CreatedAt = c.CreatedAt,
+                     })
+                 })
+                 .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
         }
 
-        public async Task<PostDto> CreatePostAsync(CreatePostDto createPostDto)
+        public async Task<PostDto> CreatePostAsync(CreatePostDto createPostDto, CancellationToken cancellationToken = default)
         {
             var post = new Post(createPostDto.Title, createPostDto.Content);
 
-            _context.Posts.Add(post);
-            await _context.SaveChangesAsync();
+            await _context.Posts.AddAsync(post, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
 
             return new PostDto
             {
@@ -78,9 +79,9 @@ namespace BlogWebApi.Services
             };
         }
 
-        public async Task<CommentDto?> AddCommentToPostAsync(Guid postId, CreateCommentDto createCommentDto)
+        public async Task<CommentDto?> AddCommentToPostAsync(Guid postId, CreateCommentDto createCommentDto, CancellationToken cancellationToken = default)
         {
-            var postExists = await _context.Posts.AnyAsync(p => p.Id == postId);
+            var postExists = await _context.Posts.AnyAsync(p => p.Id == postId, cancellationToken);
 
             if (!postExists)
             {
@@ -89,8 +90,8 @@ namespace BlogWebApi.Services
 
             var comment = new Comment(createCommentDto.Content, createCommentDto.Author, postId);
 
-            _context.Comments.Add(comment);
-            await _context.SaveChangesAsync();
+            await _context.Comments.AddAsync(comment, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
 
             return new CommentDto
             {

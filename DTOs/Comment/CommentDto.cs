@@ -24,10 +24,5 @@ namespace BlogWebApi.DTOs.Comment
         /// The date and time when the comment was created
         /// </summary>
         public DateTime CreatedAt { get; set; }
-
-        /// <summary>
-        /// The ID of the post this comment belongs to
-        /// </summary>
-        public Guid PostId { get; set; }
     }
 }

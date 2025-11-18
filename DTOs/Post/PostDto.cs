@@ -30,6 +30,6 @@ namespace BlogWebApi.DTOs.Post
         /// <summary>
         /// The list of comments associated with this post
         /// </summary>
-        public List<CommentDto> Comments { get; set; } = new List<CommentDto>();
+        public IEnumerable<CommentDto> Comments { get; set; } = [];
     }
 }

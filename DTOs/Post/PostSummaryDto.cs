@@ -16,6 +16,11 @@ namespace BlogWebApi.DTOs.Post
         public string Title { get; set; } = string.Empty;
 
         /// <summary>
+        /// The author of the post
+        /// </summary>
+        public string Author { get; set; } = string.Empty;
+
+        /// <summary>
         /// The number of comments associated with this post
         /// </summary>
         public int CommentCount { get; set; }

@@ -19,5 +19,12 @@ namespace BlogWebApi.DTOs.Post
         /// </summary>
         [Required(ErrorMessage = "Content is required")]
         public string Content { get; set; } = string.Empty;
+
+        /// <summary>
+        /// The author of the post
+        /// </summary>
+        [Required(ErrorMessage = "Author is required")]
+        [StringLength(100, ErrorMessage = "Author name cannot exceed 100 characters")]
+        public string Author { get; set; } = string.Empty;
     }
 }

@@ -20,6 +20,7 @@ namespace BlogWebApi.Storage
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Title).IsRequired().HasMaxLength(200);
                 entity.Property(e => e.Content).IsRequired();
+                entity.Property(e => e.Author).IsRequired().HasMaxLength(100);
                 entity.Property(e => e.CreatedAt).IsRequired();
 
                 entity.HasMany(e => e.Comments)

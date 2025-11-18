@@ -23,6 +23,11 @@ namespace BlogWebApi.DTOs.Post
         public string Content { get; set; } = string.Empty;
 
         /// <summary>
+        /// The author of the post
+        /// </summary>
+        public string Author { get; set; } = string.Empty;
+
+        /// <summary>
         /// The date and time when the post was created
         /// </summary>
         public DateTime CreatedAt { get; set; }

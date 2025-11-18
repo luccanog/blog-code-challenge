@@ -26,6 +26,7 @@ namespace BlogWebApi.Services
                 {
                     Id = p.Id,
                     Title = p.Title,
+                    Author = p.Author,
                     CommentCount = p.Comments.Count,
                     CreatedAt = p.CreatedAt
                 })
@@ -44,6 +45,7 @@ namespace BlogWebApi.Services
                      Id = p.Id,
                      Title = p.Title,
                      Content = p.Content,
+                     Author = p.Author,
                      CreatedAt = p.CreatedAt,
                      Comments = p.Comments.Select(c => new CommentDto
                      {
@@ -58,7 +60,7 @@ namespace BlogWebApi.Services
 
         public async Task<PostDto> CreatePostAsync(CreatePostDto createPostDto, CancellationToken cancellationToken = default)
         {
-            var post = new Post(createPostDto.Title, createPostDto.Content);
+            var post = new Post(createPostDto.Title, createPostDto.Content, createPostDto.Author);
 
             await _context.Posts.AddAsync(post, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
@@ -68,6 +70,7 @@ namespace BlogWebApi.Services
                 Id = post.Id,
                 Title = post.Title,
                 Content = post.Content,
+                Author = post.Author,
                 CreatedAt = post.CreatedAt,
                 Comments = post.Comments.Select(c => new CommentDto
                 {

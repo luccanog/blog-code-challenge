@@ -5,7 +5,7 @@ namespace BlogWebApi.DTOs.Post
     /// <summary>
     /// DTO for returning post data
     /// </summary>
-    public class PostDto
+    public record PostDto
     {
         /// <summary>
         /// The unique identifier of the post

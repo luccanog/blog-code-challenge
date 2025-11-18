@@ -3,7 +3,7 @@ namespace BlogWebApi.DTOs.Post
     /// <summary>
     /// DTO for returning post summary data in list views
     /// </summary>
-    public class PostSummaryDto
+    public record PostSummaryDto
     {
         /// <summary>
         /// The unique identifier of the post

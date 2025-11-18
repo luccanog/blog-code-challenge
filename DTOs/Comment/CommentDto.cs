@@ -3,7 +3,7 @@ namespace BlogWebApi.DTOs.Comment
     /// <summary>
     /// DTO for returning comment data
     /// </summary>
-    public class CommentDto
+    public record CommentDto
     {
         /// <summary>
         /// The unique identifier of the comment

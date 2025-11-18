@@ -5,7 +5,7 @@ namespace BlogWebApi.DTOs.Comment
     /// <summary>
     /// DTO for creating a new comment
     /// </summary>
-    public class CreateCommentDto
+    public record CreateCommentDto
     {
         /// <summary>
         /// The content of the comment

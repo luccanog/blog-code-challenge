@@ -5,7 +5,7 @@ namespace BlogWebApi.DTOs.Post
     /// <summary>
     /// DTO for creating a new post
     /// </summary>
-    public class CreatePostDto
+    public record CreatePostDto
     {
         /// <summary>
         /// The title of the post

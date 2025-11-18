@@ -5,19 +5,13 @@ A RESTful API built with ASP.NET Core 8.0 for managing blog posts and comments.
 
 ## Getting Started
 
-### 1. Restore Dependencies
-
-```bash
-dotnet restore
-```
-
-### 2. Run the Application
+### Run the Application
 
 ```bash
 dotnet run --launch-profile https
 ```
 
-### 3. Access Swagger UI
+### Access Swagger UI
 
 You can open Swagger UI and send HTTP requests
 
@@ -66,7 +60,6 @@ blog-code-challenge/
 - GUID generation is encapsulated within entities
 
 - Data annotations on DTOs for request validation
-- Model state validation in controllers
 - Proper HTTP status codes (200, 201, 204, 400, 404)
 
 ## Database
